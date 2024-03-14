@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from divideandconquer import DrawBezierCurve, DrawLine
+from dncv2 import BezierCurve
 
 # Meminta input
 print("-- TITIK 1 --")
@@ -25,11 +25,4 @@ print("Iterasi dilakukan minimal sekali")
 iteration = int(input("Mau iterasi berapa kali: "))
 
 # Pemrosesan
-# Gambar 2 garis dari 3 titik awal
-DrawLine(p0, p1, 0)
-DrawLine(p1, p2, 0)
-
-# Iterasi
-DrawBezierCurve(p0, p1, p2, iteration)
-plt.grid(True)
-plt.show()
+BezierCurve(p0, p1, p2, iteration)

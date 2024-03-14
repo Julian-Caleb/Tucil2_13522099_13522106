@@ -11,7 +11,7 @@ def DrawLine(p0 : (int, int), p1 : (int, int), color : int) :
     arr.append(p1)
     x = [point[0] for point in arr]
     y = [point[1] for point in arr]
-    plt.plot(x, y, linestyle='-', color=listColor[color%(len(listColor))])
+    plt.plot(x, y, marker='o', linestyle='-', color=listColor[color%(len(listColor))])
 
 # Fungsi untuk membuat titik tengah antar 2 titik
 def MakeNewPoint(p0 : (int, int), p1 : (int, int)) :
