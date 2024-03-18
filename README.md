@@ -7,13 +7,6 @@ Daftar anggota kelompok:
 * [Deskripsi Singkat](#deskripsi-singkat)
 * [Requirements](#requirements)
 * [Cara Menjalankan](#cara-menjalankan)
-* [Screenshots](#screenshots)
-* [Setup](#setup)
-* [Usage](#usage)
-* [Project Status](#project-status)
-* [Room for Improvement](#room-for-improvement)
-* [Acknowledgements](#acknowledgements)
-* [Contact](#contact)
 
 
 ## Deskripsi Singkat
