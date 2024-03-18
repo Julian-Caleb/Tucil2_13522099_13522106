@@ -47,3 +47,5 @@ def draw_bezier_curve_bf(control_points: List[Tuple[float, float]], iteration: i
         center_x = (x_min + x_max) / 2
         center_y = y_max
         plt.text(center_x, center_y, f"Elapsed time: {elapsed_time:.4f} seconds", fontsize=12, ha='center')
+        plt.grid(True)
+        plt.show()
