@@ -1,9 +1,6 @@
 import matplotlib.pyplot as plt
 import time
 
-# Inisialisasi global array
-finalArrayPoints = []
-
 # Fungsi untuk menampilkan garis antar 2 titik
 def DrawLine(p0, p1) :
     arr = []
@@ -47,14 +44,14 @@ def PopulatePoints(controlPoints) :
 # -- DIVIDE -- 
 # Titik hasil kemudian akan diproses secara dipisah dan rekursif, dengan meng-
 # gunakan titik tengah, yaitu pada index midArrIdx = (2n-1)//2, dan dibagi 
-# pemanggilan fungsi dari idx 0 hingga midArrIdx dan idx midArrIdx hingga last 
-# index. Divide dilakukan hingga iteration, yang setiap pemanggilannya -1, 
+# pemanggilan fungsi dari idx 0 hingga midArrIdx (DrawBezierCurve kiri)
+# dan idx midArrIdx hingga last index (DrawBezierCurve kanan).
+# Divide dilakukan hingga iteration, yang setiap pemanggilannya -1, 
 # mencapai nilai 0.
-# -- CONQUER --
-# Menggunakan finalArrayPoints sebagai array global (yang sebelumnya sudah diisi)
-# titik paling pertama), akan ditambahkan dengan titik pada index midArrIdx setiap
-# kali fungsi dipanggil. Setelah ditambahkan semua, finalArrayPoints nanti akan di-
-# tambah dengan titik yang paling akhir
+# -- COMBINE --
+# Jika mencapai basis, fungsi akan mengembalikan empty array. Di luar itu,
+# akan dilakukan proses combine yaitu antara DrawBezierCurve kiri, titik tengah
+# dan DrawBezierCurve kanan.
 def DrawBezierCurve(controlPoints, iteration) :
     print("Iterasi mundur ke:", iteration)
     if (iteration > 0) :
@@ -65,11 +62,9 @@ def DrawBezierCurve(controlPoints, iteration) :
         midArrIdx = (len(newControlPoints)//2) # + 1 - 1 karena index
         print("Left branch:", newControlPoints[0:midArrIdx+1])
         print("Right branch:", newControlPoints[midArrIdx:])
-        DrawBezierCurve(newControlPoints[0:midArrIdx+1], iteration) # Left branch
-        finalArrayPoints.append(newControlPoints[midArrIdx])
-        DrawBezierCurve(newControlPoints[midArrIdx:], iteration) # Right branch
-    # else :
-    #     Do Nothing
+        return DrawBezierCurve(newControlPoints[0:midArrIdx+1], iteration) + [newControlPoints[midArrIdx]] + DrawBezierCurve(newControlPoints[midArrIdx:], iteration)
+    else :
+        return []
     
 # Initialization
 def BezierMain(controlPoints, iteration) :    
@@ -81,8 +76,9 @@ def BezierMain(controlPoints, iteration) :
     print(start_time)
     
     # Divide and Conquer
+    finalArrayPoints = []
     finalArrayPoints.append(controlPoints[0])
-    DrawBezierCurve(controlPoints, iteration)
+    finalArrayPoints.extend(DrawBezierCurve(controlPoints, iteration))
     finalArrayPoints.append(controlPoints[-1])
     
     # Menampilkan kurva bezier
@@ -116,7 +112,7 @@ def BezierMain(controlPoints, iteration) :
         
             # Divide and Conquer
             finalArrayPoints.append(controlPoints[0])
-            DrawBezierCurve(controlPoints, i+1)
+            finalArrayPoints.extend(DrawBezierCurve(controlPoints, iteration))
             finalArrayPoints.append(controlPoints[-1])
             
             # Menampilkan kurva bezier
