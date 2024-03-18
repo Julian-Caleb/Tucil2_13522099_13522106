@@ -18,8 +18,8 @@ def draw_bezier_curve_bf(control_points: List[Tuple[float, float]], iteration: i
     arr_of_curve_points = []
     num_control_points = len(control_points)
     if (iteration > 0) :
-        t = float(1 / iteration)
-        for i in range (iteration + 1):
+        t = float(1 / (iteration + 1))
+        for i in range (iteration + 2):
             x = 0.0
             y = 0.0
             for j in range(num_control_points):
