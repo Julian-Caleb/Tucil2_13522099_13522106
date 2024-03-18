@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from dncv2 import BezierCurve
+from dncv3 import BezierMain
 from bruteforce import draw_bezier_curve_bf
 
 # Meminta input
@@ -38,13 +38,12 @@ while (choice != 1) and (choice != 2):
 
 if choice == 1:
     # Pemrosesan
-    BezierCurve(p0, p1, p2, iteration)
+    BezierMain(p0, p1, p2, iteration)
 else:
     control_points = []
     control_points.append(p0)
     control_points.append(p1)
     control_points.append(p2)
     draw_bezier_curve_bf(control_points, iteration)
-
-plt.grid(True)
-plt.show()
+    plt.grid(True)
+    plt.show()
