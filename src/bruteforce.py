@@ -19,8 +19,8 @@ def draw_bezier_curve_bf(control_points: List[Tuple[float, float]], iteration: i
     start_time = time.time()
     arr_of_curve_points = []
     num_control_points = len(control_points)
-    for p in range(num_control_points):
-        draw_line(control_points[k], control_points[k + 1], "blue")
+    for p in range(num_control_points - 1):
+        draw_line(control_points[p], control_points[p + 1], "blue")
     if (iteration > 0):
         # t merupakan interval titik antara
         # misal terdapat 4 titik antara, intervalnya adalah 1 dibagi 4 + 1, yaitu 0.2
@@ -36,7 +36,7 @@ def draw_bezier_curve_bf(control_points: List[Tuple[float, float]], iteration: i
                 y += float(math.comb(num_control_points - 1, j) * ((1 - t * i) ** (num_control_points - 1 - j)) * ((t * i) ** j) * control_points[j][1])
             arr_of_curve_points.append((x, y))
         # Gambarkan garis antar titik dalam kurva Bezier
-        for k in range(iteration):
+        for k in range(iteration + 1):
             draw_line(arr_of_curve_points[k], arr_of_curve_points[k + 1], "red")
         end_time = time.time()
         elapsed_time = end_time - start_time
