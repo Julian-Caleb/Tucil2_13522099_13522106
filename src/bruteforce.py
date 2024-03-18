@@ -5,13 +5,13 @@ import time
 
 # Fungsi untuk menggambarkan garis diantara dua titik
 # Input titik pertama dan titik kedua
-def draw_line(p0 : (float, float), p1 : (float, float)):
+def draw_line(p0 : (float, float), p1 : (float, float), color: str):
     arr = []
     arr.append(p0)
     arr.append(p1)
     x = [point[0] for point in arr]
     y = [point[1] for point in arr]
-    plt.plot(x, y, marker = 'o', linestyle = '-', color = "red")
+    plt.plot(x, y, marker = 'o', linestyle = '-', color = color)
 
 # Fungsi rekursif untuk membuat kurva Bezier
 # Input berupa list titik kontrol dan jumlah titik antara titik kontrol pertama dan titik kontrol terakhir)
@@ -19,6 +19,8 @@ def draw_bezier_curve_bf(control_points: List[Tuple[float, float]], iteration: i
     start_time = time.time()
     arr_of_curve_points = []
     num_control_points = len(control_points)
+    for p in range(num_control_points):
+        draw_line(control_points[k], control_points[k + 1], "blue")
     if (iteration > 0):
         # t merupakan interval titik antara
         # misal terdapat 4 titik antara, intervalnya adalah 1 dibagi 4 + 1, yaitu 0.2
@@ -35,7 +37,7 @@ def draw_bezier_curve_bf(control_points: List[Tuple[float, float]], iteration: i
             arr_of_curve_points.append((x, y))
         # Gambarkan garis antar titik dalam kurva Bezier
         for k in range(iteration):
-            draw_line(arr_of_curve_points[k], arr_of_curve_points[k + 1])
+            draw_line(arr_of_curve_points[k], arr_of_curve_points[k + 1], "red")
         end_time = time.time()
         elapsed_time = end_time - start_time
         plt.gca().set_aspect('equal', adjustable='box')
